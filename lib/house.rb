@@ -30,8 +30,7 @@ class House
   end
 
   def rooms_sorted_by_area
-    sorted_rooms = @rooms.sort_by { |x| x.area }
-    sorted_rooms.reverse
+    sorted_rooms = @rooms.sort_by { |x| x.area }.reverse
   end
 
   def rooms_by_category
@@ -45,5 +44,4 @@ class House
     end
     hash
   end
-
 end
