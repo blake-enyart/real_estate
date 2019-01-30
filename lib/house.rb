@@ -15,13 +15,35 @@ class House
   end
 
   def rooms_from_category(cat)
-    @rooms.select { |x| x.category == cat }
+    rooms = @rooms.select { |x| x.category == cat }
   end
 
   def area
     house_area = []
     @rooms.map { |x| house_area << x.area }
     house_area.reduce(:+)
+  end
+
+  def price_per_square_foot
+    @price = @price[1..-1].to_f
+    (@price / area).round(2)
+  end
+
+  def rooms_sorted_by_area
+    sorted_rooms = @rooms.sort_by { |x| x.area }
+    sorted_rooms.reverse
+  end
+
+  def rooms_by_category
+    room_cat = []
+    @rooms.select { |x| room_cat << x.category }
+    room_cat.uniq!
+
+    hash = {}
+    for category in room_cat do
+      hash[category] = rooms_from_category(category)
+    end
+    hash
   end
 
 end
